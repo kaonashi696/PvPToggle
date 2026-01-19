@@ -25,7 +25,7 @@ public class PvPAdminSetCommand extends AbstractCommand {
 
     public PvPAdminSetCommand() {
         super("set", "Set a config value");
-        this.keyArg = this.withRequiredArg("key", "Config key (combattimer, cooldown, default, persist, itemprotection)", ArgTypes.STRING);
+        this.keyArg = this.withRequiredArg("key", "Config key (combattimer, cooldown, offtimeout, default, persist, itemprotection, knockback)", ArgTypes.STRING);
         this.valueArg = this.withRequiredArg("value", "New value", ArgTypes.STRING);
     }
 
@@ -56,6 +56,16 @@ public class PvPAdminSetCommand extends AbstractCommand {
                 config.setToggleCooldownSeconds(seconds);
                 Message timerMsg = Message.translation(seconds == 0 ? "pvptoggle.common.seconds_disabled" : "pvptoggle.common.seconds").param("count", seconds);
                 context.sendMessage(Message.translation("pvptoggle.admin.set.toggle_cooldown").param("value", timerMsg));
+            }
+            case "offtimeout" -> {
+                Long seconds = parseLong(value);
+                if (seconds == null) {
+                    context.sendMessage(MSG_INVALID_VALUE);
+                    return CompletableFuture.completedFuture(null);
+                }
+                config.setOffTimeoutSeconds(seconds);
+                Message timerMsg = Message.translation(seconds == 0 ? "pvptoggle.common.seconds_disabled" : "pvptoggle.common.seconds").param("count", seconds);
+                context.sendMessage(Message.translation("pvptoggle.admin.set.off_timeout").param("value", timerMsg));
             }
             case "default" -> {
                 Boolean enabled = parseBoolean(value);

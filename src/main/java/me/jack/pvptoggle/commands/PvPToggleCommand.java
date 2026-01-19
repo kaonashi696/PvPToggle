@@ -10,6 +10,7 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import me.jack.pvptoggle.components.PvPToggleComponent;
+import me.jack.pvptoggle.util.PvPToggleMessageUtil;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 
 import java.time.Instant;
@@ -44,6 +45,16 @@ public class PvPToggleCommand extends AbstractPlayerCommand {
             return;
         }
 
+        if (pvp.isPvPEnabled()) {
+            long remainingOffTimeout = pvp.getRemainingOffTimeoutSeconds();
+            if (remainingOffTimeout > 0) {
+                pvp.setPendingDisableAt(pvp.getOffTimeoutEndTime());
+                pvp.setLastDisableAnnouncementSeconds(remainingOffTimeout);
+                commandContext.sendMessage(PvPToggleMessageUtil.buildDisableCountdownMessage(remainingOffTimeout));
+                return;
+            }
+        }
+
         if (pvp.isOnCooldown()) {
             commandContext.sendMessage(Message.translation("pvptoggle.toggle_cooldown").param("timeLeft", pvp.getRemainingCooldown()));
             return;
@@ -53,6 +64,7 @@ public class PvPToggleCommand extends AbstractPlayerCommand {
 
         pvp.setPvPEnabled(!pvp.isPvPEnabled());
         pvp.setLastToggleTime(Instant.now());
+        pvp.clearPendingDisable();
         commandContext.sendMessage(Message.translation(messageKey));
     }
 }

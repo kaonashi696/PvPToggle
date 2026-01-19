@@ -13,6 +13,7 @@ import me.jack.pvptoggle.components.PvPToggleComponent;
 import me.jack.pvptoggle.config.PvPToggleConfig;
 import me.jack.pvptoggle.systems.CombatTrackingSystem;
 import me.jack.pvptoggle.systems.PreventDamageSystem;
+import me.jack.pvptoggle.systems.PvPOffTimeoutSystem;
 import me.jack.pvptoggle.systems.PvPItemProtectionSystem;
 
 import javax.annotation.Nonnull;
@@ -70,6 +71,7 @@ public class PvPTogglePlugin extends JavaPlugin {
         this.getEntityStoreRegistry().registerSystem(new CombatTrackingSystem());
         this.getEntityStoreRegistry().registerSystem(new PreventDamageSystem());
         this.getEntityStoreRegistry().registerSystem(new PvPItemProtectionSystem());
+        this.getEntityStoreRegistry().registerSystem(new PvPOffTimeoutSystem());
 
         this.getCommandRegistry().registerCommand(new PvPCommand());
     }

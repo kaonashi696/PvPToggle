@@ -56,6 +56,7 @@ public class PvPOnCommand extends AbstractPlayerCommand {
 
         pvp.setPvPEnabled(true);
         pvp.setLastToggleTime(Instant.now());
+        pvp.clearPendingDisable();
         commandContext.sendMessage(Message.translation("pvptoggle.on"));
     }
 }

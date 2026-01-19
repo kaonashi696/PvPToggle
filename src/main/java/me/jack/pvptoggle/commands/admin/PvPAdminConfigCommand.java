@@ -33,6 +33,12 @@ public class PvPAdminConfigCommand extends AbstractCommand {
                 : Message.translation("pvptoggle.common.disabled");
         context.sendMessage(Message.translation("pvptoggle.config.toggle_cooldown").param("value", cooldownValue));
 
+        long offTimeout = config.getOffTimeoutSeconds();
+        Message offTimeoutValue = offTimeout > 0
+                ? Message.translation("pvptoggle.common.seconds").param("count", offTimeout)
+                : Message.translation("pvptoggle.common.disabled");
+        context.sendMessage(Message.translation("pvptoggle.config.off_timeout").param("value", offTimeoutValue));
+
         context.sendMessage(Message.translation("pvptoggle.config.default_state")
                 .param("state", Message.translation(config.isDefaultPvPEnabled() ? "pvptoggle.common.enabled" : "pvptoggle.common.disabled")));
 
@@ -49,6 +55,7 @@ public class PvPAdminConfigCommand extends AbstractCommand {
         context.sendMessage(Message.translation("pvptoggle.config.help.title"));
         context.sendMessage(Message.translation("pvptoggle.config.help.combat"));
         context.sendMessage(Message.translation("pvptoggle.config.help.cooldown"));
+        context.sendMessage(Message.translation("pvptoggle.config.help.offtimeout"));
         context.sendMessage(Message.translation("pvptoggle.config.help.default"));
         context.sendMessage(Message.translation("pvptoggle.config.help.persist"));
         context.sendMessage(Message.translation("pvptoggle.config.help.itemprotection"));

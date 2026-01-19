@@ -13,6 +13,7 @@ public class PvPToggleConfig {
 
     private long combatTimerSeconds = PvPToggleConstants.COMBAT_TIMER_SECONDS;
     private long toggleCooldownSeconds = PvPToggleConstants.TOGGLE_COOLDOWN_SECONDS;
+    private long offTimeoutSeconds = PvPToggleConstants.OFF_TIMEOUT_SECONDS;
 
     public static final BuilderCodec<PvPToggleConfig> CODEC = BuilderCodec
             .builder(PvPToggleConfig.class, PvPToggleConfig::new)
@@ -28,6 +29,9 @@ public class PvPToggleConfig {
             .append(new KeyedCodec<>("ToggleCooldownSeconds", Codec.LONG),
                     (config, value) -> config.toggleCooldownSeconds = value,
                     (config) -> config.toggleCooldownSeconds).add()
+            .append(new KeyedCodec<>("OffTimeoutSeconds", Codec.LONG),
+                    (config, value) -> config.offTimeoutSeconds = value,
+                    (config) -> config.offTimeoutSeconds).add()
             .append(new KeyedCodec<>("ItemProtectionEnabled", Codec.BOOLEAN),
                     (config, value) -> config.itemProtectionEnabled = value,
                     (config) -> config.itemProtectionEnabled).add()
@@ -72,6 +76,16 @@ public class PvPToggleConfig {
 
     public PvPToggleConfig setToggleCooldownSeconds(long toggleCooldownSeconds) {
         this.toggleCooldownSeconds = toggleCooldownSeconds;
+
+        return this;
+    }
+
+    public long getOffTimeoutSeconds() {
+        return offTimeoutSeconds;
+    }
+
+    public PvPToggleConfig setOffTimeoutSeconds(long offTimeoutSeconds) {
+        this.offTimeoutSeconds = offTimeoutSeconds;
 
         return this;
     }

@@ -8,4 +8,5 @@ public class PvPToggleConstants {
 
     public static final long TOGGLE_COOLDOWN_SECONDS = 5;
     public static final long COMBAT_TIMER_SECONDS = 10;
+    public static final long OFF_TIMEOUT_SECONDS = 0;
 }

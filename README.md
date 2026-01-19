@@ -11,6 +11,7 @@ PvP Toggle gives players control over their PvP status. Players can choose to op
 - **Per-player PvP toggle** - Each player can independently enable or disable their PvP status
 - **Combat protection** - Players cannot toggle PvP while actively in combat
 - **Toggle cooldown** - Configurable cooldown between PvP state changes to prevent abuse
+- **Off timeout** - Delay before PvP can be turned off after enabling
 - **Persistent state** - PvP status is saved across server restarts
 - **Admin controls** - Server administrators can view and modify plugin settings in-game
 
@@ -23,6 +24,7 @@ When a player has PvP disabled:
 If either the attacker or the target has PvP disabled, no damage is dealt.
 
 The combat timer prevents players from disabling PvP mid-fight. After engaging in PvP combat, players must wait for the combat timer to expire before they can change their PvP status.
+The off timeout (if configured) requires players to keep PvP enabled for a minimum time before turning it off, and will queue the request to disable when used early.
 
 ## Commands
 
@@ -47,6 +49,7 @@ The combat timer prevents players from disabling PvP mid-fight. After engaging i
 |------------------|------|----------------------------------------------------------------|
 | `combattimer`    | seconds | How long after PvP damage before you can toggle (0 to disable) |
 | `cooldown`       | seconds | How long between PvP toggles (0 to disable)                    |
+| `offtimeout`     | seconds | Minimum time after enabling PvP before disabling (0 to disable) |
 | `default`        | true/false | Default PvP state for new players                              |
 | `persist`        | true/false | Save PvP state across server restarts                          |
 | `itemprotection` | true/false | Enable item protection for PvP players                         |
@@ -59,6 +62,7 @@ Boolean values accept: `true`, `false`, `yes`, `no`, `on`, `off`, `1`, `0`
 |-------------------|------------|
 | Combat Timer      | 10 seconds |
 | Toggle Cooldown   | 5 seconds  |
+| Off Timeout       | 0 seconds  |
 | Default PvP State | Disabled   |
 | Data Persistence  | Enabled    |
 | Item Protection   | Enabled    |

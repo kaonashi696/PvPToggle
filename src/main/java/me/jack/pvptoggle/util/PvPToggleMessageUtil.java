@@ -2,8 +2,16 @@ package me.jack.pvptoggle.util;
 
 import com.hypixel.hytale.server.core.Message;
 
+import java.awt.Color;
+
 public final class PvPToggleMessageUtil {
     private PvPToggleMessageUtil() {
+    }
+
+    public static Message buildPublicPvpOnMessage(String playerName) {
+        return Message.translation("pvptoggle.public_on")
+                .param("player", playerName)
+                .color(Color.RED);
     }
 
     public static Message buildDisableCountdownMessage(long remainingSeconds) {

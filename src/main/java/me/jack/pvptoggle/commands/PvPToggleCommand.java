@@ -60,11 +60,15 @@ public class PvPToggleCommand extends AbstractPlayerCommand {
             return;
         }
 
-        String messageKey = pvp.isPvPEnabled() ? "pvptoggle.off" : "pvptoggle.on";
+        boolean newState = !pvp.isPvPEnabled();
+        String messageKey = newState ? "pvptoggle.on" : "pvptoggle.off";
 
-        pvp.setPvPEnabled(!pvp.isPvPEnabled());
+        pvp.setPvPEnabled(newState);
         pvp.setLastToggleTime(Instant.now());
         pvp.clearPendingDisable();
         commandContext.sendMessage(Message.translation(messageKey));
+        if (newState) {
+            world.sendMessage(PvPToggleMessageUtil.buildPublicPvpOnMessage(playerRef.getUsername()));
+        }
     }
 }

@@ -1,5 +1,6 @@
 on = PvP is now enabled. You can attack and be attacked by other players.
 off = PvP is now disabled. You cannot attack or be attacked by other players.
+public_on = {player} has enabled PvP.
 
 already_enabled = PvP is already enabled.
 already_disabled = PvP is already disabled.

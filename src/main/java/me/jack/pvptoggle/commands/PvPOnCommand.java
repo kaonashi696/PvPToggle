@@ -10,6 +10,7 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import me.jack.pvptoggle.components.PvPToggleComponent;
+import me.jack.pvptoggle.util.PvPToggleMessageUtil;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 
 import java.time.Instant;
@@ -58,5 +59,6 @@ public class PvPOnCommand extends AbstractPlayerCommand {
         pvp.setLastToggleTime(Instant.now());
         pvp.clearPendingDisable();
         commandContext.sendMessage(Message.translation("pvptoggle.on"));
+        world.sendMessage(PvPToggleMessageUtil.buildPublicPvpOnMessage(playerRef.getUsername()));
     }
 }
